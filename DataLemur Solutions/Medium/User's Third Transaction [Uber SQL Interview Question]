@@ -1,0 +1,14 @@
+with cte as (
+SELECT
+user_id,
+spend,
+transaction_date,
+rank() over(PARTITION BY user_id order by transaction_date) as ranking
+FROM transactions)
+
+SELECT
+user_id,
+spend,
+transaction_date
+FROM cte
+WHERE ranking = 3
