@@ -1,0 +1,9 @@
+with cte as(
+SELECT
+sum(item_count * order_occurrences) as total_items,
+sum(order_occurrences) as total_orders
+FROM items_per_order)
+
+SELECT
+round( 1.0 * total_items / total_orders, 1) as mean
+FROM cte

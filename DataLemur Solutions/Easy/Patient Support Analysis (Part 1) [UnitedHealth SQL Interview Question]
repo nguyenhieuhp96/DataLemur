@@ -1,0 +1,11 @@
+with cte as (
+SELECT 
+COUNT(policy_holder_id) as member_count
+FROM callers
+GROUP BY policy_holder_id
+HAVING count(policy_holder_ID) >= 3
+ORDER BY count(policy_holder_ID))
+
+SELECT 
+count(member_count) 
+FROM cte

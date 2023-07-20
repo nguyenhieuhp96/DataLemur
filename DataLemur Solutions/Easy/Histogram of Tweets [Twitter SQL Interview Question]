@@ -1,0 +1,14 @@
+with cte as(
+SELECT
+user_id,
+count(tweet_id) as tweet_bucket
+FROM tweets
+WHERE tweet_date >= '01/01/2022' and tweet_date < '01/01/2023'
+GROUP BY 1
+)
+
+SELECT 
+tweet_bucket,
+count(user_id) as users_num
+FROM cte 
+GROUP BY 1

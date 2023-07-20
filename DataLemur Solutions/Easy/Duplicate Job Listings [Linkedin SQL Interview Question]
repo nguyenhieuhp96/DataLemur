@@ -1,0 +1,8 @@
+SELECT 
+COUNT(distinct jl1.company_id) AS co_w_duplicate_jobs
+FROM job_listings jl1
+INNER JOIN job_listings jl2
+ON jl1.company_id = jl2.company_id
+  AND jl1.title = jl2.title
+  AND jl1.description = jl2.description
+  AND jl1.job_id <> jl2.job_id

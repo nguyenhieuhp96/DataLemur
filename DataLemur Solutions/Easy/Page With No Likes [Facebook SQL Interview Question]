@@ -1,0 +1,7 @@
+SELECT
+pages.page_id
+FROM pages
+LEFT JOIN page_likes
+USING(page_id)
+WHERE liked_date is null
+ORDER BY 1 
