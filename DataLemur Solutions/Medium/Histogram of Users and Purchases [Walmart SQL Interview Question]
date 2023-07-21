@@ -1,0 +1,17 @@
+with cte as (
+SELECT
+transaction_date,
+user_id,
+count(product_id) as purchase_count,
+dense_rank() over(PARTITION BY user_id order by transaction_date desc) as aa
+FROM user_transactions 
+GROUP BY 1, 2
+ORDER BY 2)
+
+SELECT
+transaction_date,
+user_id,
+purchase_count
+FROM cte 
+WHERE aa = 1 
+ORDER BY 1

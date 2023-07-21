@@ -1,0 +1,11 @@
+with cte as (
+SELECT
+count(e.email_id) as total_mail,
+sum(case when signup_action = 'Confirmed' then 1 else 0 end) as cf_mail
+FROM emails as e  
+JOIN texts as t USING(email_id))
+
+SELECT
+round(cast(cf_mail as decimal) /  total_mail, 2) as confirm_rate
+FROM cte
+

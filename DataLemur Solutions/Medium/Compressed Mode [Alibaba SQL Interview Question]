@@ -1,0 +1,10 @@
+with cte as (
+SELECT
+*,
+rank() over(order by order_occurrences desc)
+FROM items_per_order)
+
+SELECT 
+item_count as mode
+FROM cte 
+WHERE rank = 1

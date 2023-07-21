@@ -1,0 +1,12 @@
+with cte as (
+SELECT
+*,
+dense_rank() over(PARTITION BY card_name order by issue_year,issue_month) as rank
+FROM monthly_cards_issued)
+
+SELECT
+card_name,
+issued_amount
+FROM cte 
+WHERE rank = 1
+ORDER BY 2 desc

@@ -1,0 +1,13 @@
+with cte as (
+SELECT
+caller.country_id as caller_country,	
+receiver.country_id	as receiver_country
+FROM phone_calls as total_call
+LEFT JOIN phone_info as caller
+ON total_call.caller_id	= caller.caller_id
+LEFT JOIN phone_info as receiver 
+ON total_call.receiver_id = receiver.caller_id) 
+
+SELECT
+round(100.0 * sum(case when caller_country != receiver_country then 1 else 0 end) / count(*), 1) as international_calls_pct
+FROM cte
